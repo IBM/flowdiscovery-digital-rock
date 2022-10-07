@@ -1,0 +1,6 @@
+{
+  "morphology": {
+    "centerlines_performance": "memory",
+    "fractal_counting_box": "spherical"
+  }
+}

@@ -1,0 +1,9 @@
+/.tags*
+/.vagrant/
+/.vscode/
+/test/src/skeleton/centerline_integrated_test.h
+/*.tmp
+CMakeSettings.json
+honeycomb_N1222L1763.json
+*.pyc
+.DS_Store

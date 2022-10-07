@@ -1,0 +1,133 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "validation_schema",
+  "description": "JSON schema for config_template.json",
+  "type": "object",
+  "properties": {
+    "setup": {
+      "title": "Setup-related configuration parameters (step 1)",
+      "type": "object",
+      "required": [
+        "folder",
+        "input_file",
+        "shape",
+        "voxel_size"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "folder": {
+          "type": "string"
+        },
+        "input_file": {
+          "type": "string"
+        },
+        "shape": {
+          "type": "object",
+          "required": [
+            "x",
+            "y",
+            "z"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "x": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "y": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "z": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "voxel_size": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMinimum": true
+        }
+      }
+    },
+    "segmentation": {
+      "title": "Segmentation-related configuration parameters (step 2)",
+      "anyOf": [
+        {
+          "title": "Manual Segmentation (requires 'threshold')",
+          "type": "object",
+          "required": [
+            "method",
+            "threshold"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "method": {
+              "type": "string",
+              "enum": [
+                "global_manual"
+              ]
+            },
+            "threshold": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            }
+          }
+        },
+        {
+          "title": "Automatic Segmentation (does not require 'threshold')",
+          "type": "object",
+          "required": [
+            "method"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "method": {
+              "type": "string",
+              "enum": [
+                "none",
+                "global_isodata",
+                "global_otsu",
+                "global_mean",
+                "global_median",
+                "global_li",
+                "global_minimum",
+                "global_intermodes",
+                "global_moments",
+                "global_maxshannonentropy",
+                "global_shanbhag"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "morphology": {
+      "title": "Morphology-related configuration parameters (step 3)",
+      "type": "object",
+      "required": [
+        "centerlines_performance",
+        "fractal_counting_box"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "centerlines_performance": {
+          "type": "string",
+          "enum": [
+            "speed",
+            "memory"
+          ]
+        },
+        "fractal_counting_box": {
+          "type": "string",
+          "enum": [
+            "cubic",
+            "spherical"
+          ]
+        }
+      }
+    }
+  }
+}

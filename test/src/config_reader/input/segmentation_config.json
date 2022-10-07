@@ -1,0 +1,6 @@
+{
+  "segmentation": {
+    "method": "global_manual",
+    "threshold": 0
+  }
+}
