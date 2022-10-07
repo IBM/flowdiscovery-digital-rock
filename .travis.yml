@@ -31,6 +31,10 @@ before_script:
   # Define branch-dependent environment variable
   - export TAG="${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}";
 
+  # Download test input files
+  - git lfs install
+  - git lfs pull
+
 script:
   # Run C++ and Python linters
   - cpplint --recursive --quiet --linelength=100 --extensions=h,cc --filter=-runtime/references,-whitespace/empty_loop_body src/ test/
