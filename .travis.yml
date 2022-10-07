@@ -33,7 +33,7 @@ before_script:
 
   # Download test input files
   - git lfs install
-  - git lfs pull
+  - git lfs checkout
 
 script:
   # Run C++ and Python linters
